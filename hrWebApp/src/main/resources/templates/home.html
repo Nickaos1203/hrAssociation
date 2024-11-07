@@ -14,13 +14,17 @@
 <body>
 <h1>Liste des employés</h1>
 
+<a href="/form" class="btn btn-primary">Ajouter un employé</a>
+
 <table class="table">
     <thead>
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
-            <th scope="col">Plus de détail</th>
+            <th scope="col">Détail</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +33,8 @@
             <td><span th:text="${employee.last_name}"></span></td>
             <td><span th:text="${employee.first_name}"></span></td>
             <td><a th:href="@{/{id} (id= ${employee.id})}" class="btn btn-primary">Détail</a></td>
+            <td><a th:href="@{/form/update (id= ${employee.id})}" class="btn btn-success">Modifier</a></td>
+            <td><a th:href="@{/{id} (id= ${employee.id})}" class="btn btn-warning">Supprimer</a></td>
         </tr>
     </tbody>
 </table>

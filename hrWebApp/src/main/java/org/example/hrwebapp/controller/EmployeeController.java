@@ -5,8 +5,7 @@ import org.example.hrwebapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,25 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employee);
         return "detailEmployee";
+    }
+
+    @GetMapping("/form")
+    public String createEmployee(Model model) {
+        model.addAttribute("employee", new Employee());
+        return "employeeForm";
+    }
+
+    @PostMapping("/form/add")
+    public String addEmployee(@ModelAttribute("employee") Employee employee, Model model) {
+        employeeService.saveEmployee(employee);
+        return "redirect:/";
+    }
+
+    @RequestMapping("form/update")
+    public String updateEmployee(@RequestParam("id") long id, Model model) {
+        Employee employee = employeeService.getEmployeeById(id);
+        model.addAttribute("employee", employee);
+        return "/updateForm";
+
     }
 }
